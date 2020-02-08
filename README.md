@@ -1,25 +1,27 @@
-# template_repo README
+# raspberry2solace README
 
-## What does this demonstrate?
-Please specify what is this demo about ...
+What does this demonstrate?
+This is a demonstration of ingesting streaming IoT sensor data via raspberry pi gateway into cloud. A Solace PubSub+ Event Broker is used to asynchronously distribute data to multiple consumers in cloud, on-prem etc.
 
 ### Cloud Services Used
-List of cloud services uses in this demo if any ...
+AWS, Node-Red, PubSub + Cloud on GCP
 
-  
 ### Solace PubSub+ features used
-List of PubSub+ features used ...
-
-**Try the live demo in action here:
-http://london.solace.com/cloud-analytics/machine-learning.html**
+Open API support, Multiple protocols, Topic Filtering, Asynchronous streaming
 
 ### Other Useful Links
-List of links to useful resources ...
-
+DHT11 Pin Configuration -  https://www.raspberrypi.org/documentation/usage/gpio/
+Install Rasbian on Raspberry Pi - https://www.raspberrypi.org/documentation/installation/installing-images/
+Install Node-Red on MAC/PC - https://nodered.org/docs/getting-started/local
 
 ## Contents
 
-What does this repostiory contain ...
+This repository contains
+- Sensor publisher python code for Raspberry Pi to publish via MQTT to Solace PubSub+ Event Broker
+- Virtual publisher python code for Raspberry Pi to publish via MQTT to Solace PubSub+ Event Broker
+- Simple screen printer for Raspberry Pi to print sensor output to screen
+- Node Red subscriber code to subscribe to Solace Pubsub+ Event Broker and dislay real time sensor graphs on UI
+- Simpl python subscriber code to subscribe to Solace Pubsub+ Event Broker
 
 
 ## Checking out
@@ -27,16 +29,20 @@ What does this repostiory contain ...
 To check out the project, clone this GitHub repository:
 
 ```
-git clone https://github.com/solacese/github-demo
-cd <github-demo>
+git clone https://github.com/solacese/raspberrypi2solace
+cd raspberrypi2solace
 ```
 
 ## Running the Demo
 
-To run the demo open:
+Install Raspbian
+https://www.raspberrypi.org/documentation/installation/installing-images/
+
+Install python 3.7
+Install pip
 
 ```
-commands to run the demo go here ...
+sudo apt install python3-pip
 ```
 
 ## Contributing
