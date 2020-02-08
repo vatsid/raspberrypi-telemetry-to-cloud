@@ -1,7 +1,7 @@
 # raspberry2solace README
 
 What does this demonstrate?
-This is a demonstration of ingesting streaming IoT sensor data via raspberry pi gateway into cloud. A Solace PubSub+ Event Broker is used to asynchronously distribute data to multiple consumers in cloud, on-prem etc.
+This is a demonstration of Streaming IoT sensor data ingest via raspberry pi gateway into cloud. A Solace PubSub+ Event Broker is used to asynchronously stream/distribute data to multiple consumers in cloud, on-prem etc.
 
 ### Cloud Services Used
 AWS, Node-Red, PubSub + Cloud on GCP
@@ -11,7 +11,9 @@ Open API support, Multiple protocols, Topic Filtering, Asynchronous streaming
 
 ### Other Useful Links
 DHT11 Pin Configuration -  https://www.raspberrypi.org/documentation/usage/gpio/
+
 Install Rasbian on Raspberry Pi - https://www.raspberrypi.org/documentation/installation/installing-images/
+
 Install Node-Red on MAC/PC - https://nodered.org/docs/getting-started/local
 
 ## Contents
@@ -38,12 +40,43 @@ cd raspberrypi2solace
 Install Raspbian
 https://www.raspberrypi.org/documentation/installation/installing-images/
 
-Install python 3.7
-Install pip
+Install python 3.7, pip3
 
 ```
 sudo apt install python3-pip
 ```
+
+Dependencies
+•	paho-mqtt
+o	pip3 install paho-mqtt
+•	Adafruit_DHT
+o	pip3 install Adafruit_DHT
+
+Software installation/Configuration
+
+On your Mac/PC
+•	Clone/Download git repository - https://github.com/SolaceLabs/makeuoft-hackathon.git
+
+•	Ssh into your raspberry pi
+
+On your Raspberry Pi
+•	From makeuoft-hackathon-master/raspberrypi2solace/publish on local machine
+
+•	Copy simpletest.py, dht11.py, raspi_solace_publish_json.py and virtual_solace_publish_json.py 
+
+o	Into any directory in raspberry pi 
+
+On your Mac/PC 
+1.	Install Node-Red - https://nodered.org/docs/getting-started/local
+2.	Run node-red on terminal/command prompt
+3.	Go to http://localhost:1880 to verify installation
+4.	Install Dashboard Nodes - https://flows.nodered.org/node/node-red-dashboard
+5.	From the folder - makeuoft-hackathon-master/raspberrypi2solace/subscribe
+6.	Copy SCADA_subscribe.json to any folder on local machine
+7.	Import the json into Node-Red editor from Menu-Import
+8.	Follow the following instructions for config
+9.	Open node “Temperature Events via Solace” Click edit
+
 
 ## Contributing
 
