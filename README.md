@@ -47,10 +47,12 @@ sudo apt install python3-pip
 ```
 
 Dependencies
-•	paho-mqtt
-o	pip3 install paho-mqtt
-•	Adafruit_DHT
-o	pip3 install Adafruit_DHT
+
+```
+pip3 install paho-mqtt
+
+pip3 install Adafruit_DHT
+```
 
 Software installation/Configuration
 
