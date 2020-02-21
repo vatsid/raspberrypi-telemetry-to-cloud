@@ -1,4 +1,4 @@
-# RaspberryPi-Solace-SCADA
+# RaspberryPi-Telemetry-AWS Cloud
 
 This repository holds code samples for using Solace Event Broker to distribute real-time sensor readings from Raspberry Pi to consuming applications on the edge/cloud. 
 
