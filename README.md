@@ -14,6 +14,7 @@ This is the demo that was presented during the MakeUofT Hackathon 2020 @ Univers
 The demo that we will be creating is a Solace IoT SCADA Demo. It shows how a raspberry PI can stream data from connected sensors into Solace PubSub+ Event Brokers. Once the event streams are available the demo uses Node-RED flows to consume the events and display the sensor data on a real-time, dynamic dashboard. 
 
 ![](images/scada-architecture.png)
+![](Event-flow.png)
 
 ### Solace PubSub+ Features Used
 - Multi-Protocol Pub/Sub
@@ -116,7 +117,7 @@ Let's also stream sensor data from some virtual sensors.
 - Run the script to start streaming events: `python3 virtual_solace_publish_json.py`
 - You should see Level, Pressure, NoX and SoX streaming readings on the screen and on Node-Red SCADA dashboard we setup earlier!
   
-Awesome job! You have now setup the SCADA demo. Your raspberry PI is now reading data from both physical and virtual sensors and streaming them as events in real-time across the Solace PubSub+ Event Broker. Once on the PubSub+ Event Broker any application, with proper permissions, can subscribe to consume those events. In this demo we created a Node-RED dashboard to do just that, but because we are following the *publish-subscribe* pattern a stream of events can be consumed by multiple consumers so go ahead and add your own consumers as well! 
+ Your raspberry PI is now reading data from both physical and virtual sensors and streaming them as events in real-time across the Solace PubSub+ Event Broker. Once on the PubSub+ Event Broker any application, with proper permissions, can subscribe to consume those events. In this demo we created a Node-RED dashboard to do just that, but because we are following the *publish-subscribe* pattern a stream of events can be consumed by multiple consumers so go ahead and add your own consumers as well! 
 
 ## Simple Python MQTT Examples
 Check out this python script which shows how to publish events to Solace PubSub+ using MQTT.
