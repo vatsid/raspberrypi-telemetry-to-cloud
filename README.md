@@ -11,7 +11,7 @@ The following items are available, skip to the proper section in the README belo
 This is the demo that was presented during the MakeUofT Hackathon 2020 @ University of Toronto, CA.
 
 ### Demo Architecture
-The demo that we will be creating is a Solace IoT SCADA Demo. It shows how a raspberry PI can stream data from connected sensors into Solace PubSub+ Event Brokers. Once the event streams are available the demo uses Node-RED flows to consume the events and display the sensor data on a real-time, dynamic dashboard. 
+The demo that we will be creating is a IoT Sensor Telemetry to Cloud Demo. It shows how a Raspberry PI can stream data from connected sensors into Solace PubSub+ Event Brokers. Once the event streams are available at the event borker, the demo uses Node-RED flows to consume the events and display the sensor data on a real-time, dynamic dashboard on AWS cloud.
 
 ![](images/scada-architecture.png)
 
