@@ -1,102 +1,118 @@
-# raspberry2solace README
 
-What does this demonstrate?
-This is a demonstration of Streaming IoT sensor data ingest via raspberry pi gateway into cloud. A Solace PubSub+ Event Broker is used to asynchronously stream/distribute data to multiple consumers in cloud, on-prem etc.
+RaspberryPi-Solace-SCADA
+This repository holds code samples for using Solace Event Broker to distribute real-time sensor readings from Raspberry Pi to consuming applications on the edge/cloud.
 
-### Cloud Services Used
-AWS, Node-Red, PubSub + Cloud on GCP
+The following items are available, skip to the proper section in the README below for each:
 
-### Solace PubSub+ features used
-Open API support, Multiple protocols, Topic Filtering, Asynchronous streaming
+Deploy the IoT SCADA Demo
+Simple Python MQTT Examples
+Deploy the IoT SCADA Demo
+This is the demo that was presented during the MakeUofT Hackathon 2020 @ University of Toronto, CA.
 
-### Other Useful Links
-DHT11 Pin Configuration -  https://www.raspberrypi.org/documentation/usage/gpio/
-
-Install Rasbian on Raspberry Pi - https://www.raspberrypi.org/documentation/installation/installing-images/
-
-Install Node-Red on MAC/PC - https://nodered.org/docs/getting-started/local
-
-## Contents
-
-This repository contains
-- Sensor publisher python code for Raspberry Pi to publish via MQTT to Solace PubSub+ Event Broker
-- Virtual publisher python code for Raspberry Pi to publish via MQTT to Solace PubSub+ Event Broker
-- Simple screen printer for Raspberry Pi to print sensor output to screen
-- Node Red subscriber code to subscribe to Solace Pubsub+ Event Broker and dislay real time sensor graphs on UI
-- Simpl python subscriber code to subscribe to Solace Pubsub+ Event Broker
+Demo Architecture
+The demo that we will be creating is a Solace IoT SCADA Demo. It shows how a raspberry PI can stream data from connected sensors into Solace PubSub+ Event Brokers. Once the event streams are available the demo uses Node-RED flows to consume the events and display the sensor data on a real-time, dynamic dashboard.
 
 
-## Checking out
 
-To check out the project, clone this GitHub repository:
+Solace PubSub+ Features Used
+Multi-Protocol Pub/Sub
+Multi-API
+Topic filtering/routing
+Eliding (future)
+MQTT Retain (Future)
+Prerequisistes
+Hardware needed:
 
-```
-git clone https://github.com/solacese/raspberrypi2solace
-cd raspberrypi2solace
-```
-
-## Running the Demo
-
-Install Raspbian
-https://www.raspberrypi.org/documentation/installation/installing-images/
-
-Install python 3.7, pip3
-
-```
-sudo apt install python3-pip
-```
-
-Dependencies
-
-```
-pip3 install paho-mqtt
-
-pip3 install Adafruit_DHT
-```
-
-Software installation/Configuration
-
-On your Mac/PC
-•	Clone/Download git repository - https://github.com/SolaceLabs/makeuoft-hackathon.git
-
-•	Ssh into your raspberry pi
-
-On your Raspberry Pi
-•	From makeuoft-hackathon-master/raspberrypi2solace/publish on local machine
-
-•	Copy simpletest.py, dht11.py, raspi_solace_publish_json.py and virtual_solace_publish_json.py 
-
-o	Into any directory in raspberry pi 
-
-On your Mac/PC 
-1.	Install Node-Red - https://nodered.org/docs/getting-started/local
-2.	Run node-red on terminal/command prompt
-3.	Go to http://localhost:1880 to verify installation
-4.	Install Dashboard Nodes - https://flows.nodered.org/node/node-red-dashboard
-5.	From the folder - makeuoft-hackathon-master/raspberrypi2solace/subscribe
-6.	Copy SCADA_subscribe.json to any folder on local machine
-7.	Import the json into Node-Red editor from Menu-Import
-8.	Follow the following instructions for config
-9.	Open node “Temperature Events via Solace” Click edit
+Raspberry PI 3 (or equivalent) w/ login credentials & internet access
+(Optional) DHT11 Digital Temperature and Humidity Sensor
+Sign-up for Solace Cloud & Get your credentials
+Sign up here: http://bit.ly/Solace-Cloud
+Launch a free messaging service. More info here
+Once you launch your free messaging service go to the Connect tab, choose MQTT and capture your connect info for later.
 
 
-## Contributing
+Setup the Node-RED Dashboard
+Install Node-RED & the Dashboard
+Install Node-Red - https://nodered.org/docs/getting-started/local
+Run node-red on terminal/command prompt
+Go to http://localhost:1880 to verify installation
+Install Dashboard Nodes - https://flows.nodered.org/node/node-red-dashboard
+Clone this repo & from the folder - makeuoft-hackathon-master/raspberrypi2solace/subscribe copy SCADA_subscribe.json to any folder on local machine
+Import the json into Node-Red editor from Menu-Import
+Configure the Dashboard
+ Choose the "IoT Cloud SCADA - AWS" Flow that now appears on the screen. 
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Authors
+Open node “Temperature Events via Solace” Click edit 
 
-See the list of [contributors](https://github.com/solacese/<github-repo>/graphs/contributors) who participated in this project.
+Edit the Server field and replace it with the MQTT Host URL including tcp:// and the port number
 
-## License
+Provide any name for the Client ID. This is just a name that identifies the client application to the event broker.
 
-This project is licensed under the Apache License, Version 2.0. - See the [LICENSE](LICENSE) file for details.
+Navigate to the security tab and enter your client Username and Password. These values can be found in Solace Cloud on the connect tab that we navigated to earlier.
 
-## Resources
 
-For more information try these resources:
+Make sure all 5 other “Event” nodes (Level Events via Solace, Pressure Events via Solace, etc) have the connectivity information you just provided as well.
 
-- The Solace Developer Portal website at: http://dev.solace.com
-- Get a better understanding of [Solace technology](http://dev.solace.com/tech/).
-- Check out the [Solace blog](http://dev.solace.com/blog/) for other interesting discussions around Solace technology
-- Ask the [Solace community.](http://dev.solace.com/community/)
+Click “Deploy” button on right corner of the screen.
+
+View the SCADA Dashboard!
+Go to http://localhost:1880/ui
+The SCADA dashboard should be displayed with static values. 
+Connect the hardware
+This section is only necessary if you are using the physical DHT11 sensors to supply Temperature & Humidity.
+
+Before starting this section shutdown and unplug your raspberry pi
+
+Lookup the Pin configuration for your Raspberry Pi, such as the below:
+
+
+
+Using the cables provided with the physical sensors connect your DHT11 to your Raspberry PI. The DHT11 sensor should have 3 pins as seen in the photo below.
+
+
+
+Connect them as follows:
+
+Signal/Data to a GPIO Pin on the Raspberry PI (such as GPIO 17 / physical pin 11 in the pin configuration image above)
+VCC (+) to a 3V or 5V Pin on the Raspberry PI (such as physical pin 1 in the pin configuration image above)
+Ground (-) to a Ground Pin on the Raspberry PI (such as physical pin 6 in the pin configuration image above)
+ 
+
+You can now power-up your raspberry pi
+
+Stream the Sensor Data to Node-RED via Solace Event Brokers
+Prepare to stream events using Python & MQTT
+ssh into Raspberry Pi
+Install python 3.7 sudo apt install python3-pip
+Install paho-mqtt to send events over mqtt pip3 install paho-mqtt
+Stream Events from the physical DHT11 sensor
+Install Adafruit_DHT to read the physical sensor pip3 install Adafruit_DHT
+
+Test the physical sensor by following these steps
+
+Edit simpletest.py and update the pin variable value to match the GPIO number you connected the Signal/Data pin of your DHT11 sensor to. If you followed the pin configuration above that would be 17
+Run the script: python3 simpletest.py
+You should see Humidity and Temperature reading on the screen; go ahead and kill the script using ctrl-c
+Now that we know the sensor works let's stream the data to the PubSub+ Event Broker using MQTT.
+
+Open the raspi_solace_publish_json.py file to edit it.
+Update the pin # again on line 13.
+Update the solace_url, solace_port, solace_user and solace_passwd to match your connection info from Solace Cloud. Remember we got this info under MQTT on the connect tab.
+Run the script to start streaming events: python3 raspi_solace_publish_json.py
+You should see Humidity and Temperature streaming readings on the screen and on Node-Red SCADA dashboard we setup earlier!
+Stream Events from the virtual sensors
+Let's also stream sensor data from some virtual sensors.
+
+Open the virtual_solace_publish_json.py file and edit solace_url, solace_port, solace_user to & solace_passwd to match your connection info from Solace Cloud. Remember we got this info under MQTT on the connect tab.
+Run the script to start streaming events: python3 virtual_solace_publish_json.py
+You should see Level, Pressure, NoX and SoX streaming readings on the screen and on Node-Red SCADA dashboard we setup earlier!
+Awesome job! You have now setup the SCADA demo. Your raspberry PI is now reading data from both physical and virtual sensors and streaming them as events in real-time across the Solace PubSub+ Event Broker. Once on the PubSub+ Event Broker any application, with proper permissions, can subscribe to consume those events. In this demo we created a Node-RED dashboard to do just that, but because we are following the publish-subscribe pattern a stream of events can be consumed by multiple consumers so go ahead and add your own consumers as well!
+
+Simple Python MQTT Examples
+Check out this python script which shows how to publish events to Solace PubSub+ using MQTT.
+
+Simple Publisher
+Check out this python script which shows how to subscribe to an event stream from Solace PubSub+ using MQTT.
+
+Simple Subscriber
