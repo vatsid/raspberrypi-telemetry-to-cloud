@@ -17,7 +17,7 @@ def main():
     solace_port = 1883
     solace_user = ""
     solace_passwd = ""
-    solace_clientid = "vats_id1"
+    solace_clientid = "vats_id"
 
     # Sensor Topics
     solace_topic_nox = "devices/nox/events"
